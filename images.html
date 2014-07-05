@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>images</title>
+<script type="text/javascript">
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+<style type="text/css">
+body,td,th {
+	font-size: 36px;
+}
+body {
+	background-image: url(images/377adab44aed2e73f0d2202a8501a18b87d6faf9.jpg);
+	background-repeat: no-repeat;
+}
+</style>
+</head>
+
+<body bgcolor="#00FF99" onload="MM_preloadImages('images/9e3df8dcd100baa1ca69c9c94510b912c8fc2e7e.jpg')">
+<p align="center"><em>Rollover image</em></p>
+<p align="center"><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image1','','images/9e3df8dcd100baa1ca69c9c94510b912c8fc2e7e.jpg',1)"><img src="images/6a600c338744ebf8a178df32dbf9d72a6059a7b6.jpg" alt="切换图片" width="297" height="184" id="Image1" /></a></p>
+<p align="center"><em>占位图片</em></p>
+<p align="center"><img name="" src="" width="200" height="200" alt="占位图片未显示" style="background-color: #993300" /></p>
+<p><a href="index.html">返回首页
+</a></p>
+</body>
+</html>

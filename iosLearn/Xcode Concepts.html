@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Xcode Concepts</title>
+</head>
+
+<body style="width:1000px">
+<div style="padding-left:50px; height:auto; width:1000px;">
+<h1 align="center">Xcode概念 </h1>
+<h2>Xcode Project</h2>
+<div style="padding-left:50px; height:auto; width:900px;">
+  <p>Xcode Project是一个包含构建一个或多个软件产品所需要的一切文件、资源及信息的仓库。 Project包含构建产品的所有元素，并负责维护各个元素之间的关系。它包含一个或多个target，这些target指定如何构建产品。Project 为其中的target定义了默认的编译设置（每个target也可以覆盖默认的设置，指定自己的构建设置）。</p>
+</div>
+<div style="padding-left:50px; height:auto; width:900px;">
+<p>Xcode Project 文件包含下面的一些信息：</p>
+<ul>
+  <li>
+    <p>对源文件的引用：</p>
+    <ul>
+      <li>
+        <p>源代码，包括头文件和实现文件</p>
+      </li>
+      <li>
+        <p>库和框架，内部和外部的</p>
+      </li>
+      <li>
+        <p>资源文件</p>
+      </li>
+      <li>
+        <p>图像文件</p>
+      </li>
+      <li>Interface Builder（NIB）文件
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Groups 导航栏中用于组织文件资源的</p>
+  </li>
+  <li>
+    <p>Project级别的构建设置。您可以为一个项目指定多个构建设置；例如，你有debug和release的生成设置。</p>
+  </li>
+  <li>
+    <p>Targets，每个Target可定制的内容：</p>
+    <ul>
+      <li>
+        <p>Project 构建的一个Product的引用</p>
+      </li>
+      <li>
+        <p>构建某个产品所用的全部文件的引用</p>
+      </li>
+      <li>
+        <p>构建某个产品所用的构建设置，包括对其他target或其他设置的依赖关系；如果对应的target没有覆盖原来的Project的设置，则使用原来Project的。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>可用来调试或测试程序的执行环境，每个执行环境可定制的内容：</p>
+    <ul>
+      <li>
+        <p>当用Xcode运行或调试可执行文件的时候，加载什么东西</p>
+      </li>
+      <li>传递给可执行文件的命令行参数
+      </li>
+      <li>程序运行时候的环境变量。      </li>
+    </ul>
+  </li>
+</ul>
+<p>一个Project可以单独存在或包含在一个工作空间中。</p>
+<p>You use Xcode schemes to specify which target, build configuration, and executable configuration is active at a given time.</p>
+<p align="left"> 使用Xcode  schemes来指定使用哪一个target、构建配置、可执行的配置</p>
+</div>
+<h2>Xcode Target</h2>
+<p>&nbsp;</p>
+<h2>Xcode Scheme</h2>
+<p>&nbsp;</p>
+<h2>Xcode Workspace</h2>
+<p>&nbsp;</p>
+<h2>Build Settings</h2>
+<p><a href="../index.html">返回首页 </a></p>
+</div>
+</body>
+</html>

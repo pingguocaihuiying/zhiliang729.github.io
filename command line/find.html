@@ -35,6 +35,212 @@ body,td,th {
 
 <body >
 <p align="center">find命令</p>
+<div>
+  <p>find命令可以删除、复制、移动和执行其查找到的文件。另外，使用-exec参数可以根据您需要的命令序列来自动运行这些文件。它甚至可以在对任何文件执行这些操作前，进一步让您进行确认。</p>
+  <p><a rel="nofollow">简化文件系统的管理</a></p>
+  <p>与大多数命令一样，find命令具有一长串令人生畏的选项和开关，它们会阻碍人们深入地学习该命令，但正是因为其范围广阔，真正的 Explorer 并不会被它们吓倒。一条好的通用原则在简化一个复杂问题时都会经过漫长的过程。启动一个终端，并尝试执行下面的命令：</p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="400" border="0">
+      <tbody>
+        <tr>
+          <td><div align="center">
+            <pre>$ find . -name *.gif -exec ls {} \;<br />
+        </pre>
+          </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>-exec 参数中包含了真正有价值的操作。当查找到匹配搜索条件的文件时，-exec参数定义了将对这些文件进行什么操作。该示例告诉计算机进行如下操作：</p>
+  <ol>
+    <li>从当前文件夹开始往下搜索，紧跟在find之后，使用点号.。</li>
+    <li>定位所有名称以 .gif 结尾的文件（图形文件）。</li>
+    <li>列出所有查找到的文件，使用ls命令。</li>
+  </ol>
+  <p>需要对-exec参数进行更深入地研究。当查找到匹配搜索条件的文件名时find命令执行ls {}字符串，用文件名和路径代替文本{}. 假设在搜索中查找到 saturn.gif 文件，find将执行如下所示的命令：</p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="400" border="0">
+      <tbody>
+        <tr>
+          <td><pre>$ ls ./gif_files/space/solar_system/saturn.gif<br />
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>本文余下的内容建立在这条一般原则之上：仔细地使用find命令可以让 UNIX 文件系统的管理工作变得更加容易。例如，如果您使用了-fstype参数，find命令可以根据查找到的文件所处的文件系统的类型来对命令进行相应的处理。在find命令对查找到的文件执行相应命令前将对您进行提示，这通常是非常有用的，您可以使用-ok参数告诉它继续执行该操作，接下来我们将对其进行介绍。</p>
+  <p><a rel="nofollow">可选的执行</a></p>
+  <p>-ok是 -exec 参数的一个重要的替代项，它的行为和-exec一样，但它会提示您是否要对文件运行相应的命令。假设您想要删除 home 目录中的大部分 .txt 文件，但希望能够逐个文件地执行该操作。像 UNIX 中的rm命令那样的删除操作是很危险的，因为当使用像find这样的自动化处理方式来查找文件时，它可能一不小心会删除重要的文件，您也许希望在删除这些系统查找到的文件之前对其进行仔细检查。</p>
+  <p>下面的命令列出了您的 home 目录中所有的 .txt 文件。要删除这些文件，必须在find 命令通过列出文件名提示您确认操作时输入Y 或者y：</p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="400" border="0">
+      <tbody>
+        <tr>
+          <td><div align="center">
+            <pre>$ find $HOME/. -name *.txt -ok rm {} \;<br />
+        </pre>
+          </div></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p>它列出了查找到的每个文件，并且系统将暂停以等待您输入Y或者y<u><strong>. 如果您按下 Enter 键，系统将不会删除该文件。(输入Y或者y，认为执行，n或者N或者Enter认为不执行)</strong></u><a rel="nofollow" href="http://www.ibm.com/developerworks/cn/aix/library/es-unix-find.html#listing1"><u>  <br />
+  清单 1</u></a> 显示了一些示例结果：</p>
+  <p><br />
+    <br />
+    <a rel="nofollow"><strong>清单 1. 示例结果</strong></a><br />
+  </p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="572" border="0">
+      <tbody>
+        <tr>
+          <td><pre>&lt; rm ... /home/bill/./.kde/share/apps/karm/karmdata.txt &gt; ?<br />&lt; rm ... /home/bill/./archives/LDDS.txt &gt; ?<br />&lt; rm ... /home/bill/./www/txt/textfile1.txt &gt; ?<br />&lt; rm ... /home/bill/./www/txt/faq.txt &gt; ?<br />&lt; rm ... /home/bill/./www/programs/MIKE.txt &gt; ?<br />&lt; rm ... /home/bill/./www/programs/EESTRING.txt &gt; ?<br />.<br />.<br />.<br />
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p>系统将在每个问号之后暂停，在本示例中，每次都按下了 Enter 键以继续处理下一个文件。（没有删除任何文件。）-ok参数允许您控制每个查找到的文件的自动化处理过程，这样就添加了一种避免自动删除文件的安全措施。</p>
+  <p>如果在使用-ok参数时涉及到过多的文件，那么一个好的方法是先运行带-exec的find命令以列出所有将要删除的文件，然后在经过检查确保其中不会删除重要的文件后，再次运行该命令，其中用rm代替ls。 -exec和-ok都非常有用，您必须确定在当前情况下哪一个能够更好的工作。请记住，安全第一！</p>
+  <p><a rel="nofollow">创造性地使用 find</a></p>
+  <p>您可以使用find命令执行各种各样的任务。本部分内容提供了使用find命令来管理文件系统的几种方式的示例。</p>
+  <p>为了保持简单，这些示例都避免了使用涉及通过管道将一个命令的输出传递到另一个命令的-exec命令。然而，您完全可以根据自己需要在 find 命令的-exec子句中使用这样的命令。</p>
+  <p><a rel="nofollow"><strong>清除临时文件</strong></a></p>
+  <p>您可以使用find 命令来清除目录或子目录中在正常使用过程中生成的临时文件，这样可以节省磁盘空间。要实现该操作，请使用下面的命令：</p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="400" border="0">
+      <tbody>
+        <tr>
+          <td><pre>$ find . \( -name a.out -o -name '*.o' -o -name 'core' \) -exec rm {} \;<br />
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p>括号中的<em><strong>文件掩码</strong></em> 标识出了需要删除的文件类型，每个文件掩码的前面都有-name. 该列表可以扩展为包括您需要清除的系统中的任何临时文件类型。在代码的编译和链接过程中，程序员及其工具会生成示例中的那些文件类型：a.out, *.o 和core. 其他的用户通常也会生成类似的临时文件，可以使用如*.tmp, *.junk等文件掩码来对命令进行相应的编辑。您可能还发现将命令放入一个称作clean的脚本中非常有用，当需要清除一个目录中的内容的时候就可以执行该脚本。</p>
+  <p><a rel="nofollow"><strong>复制目录中的内容</strong></a></p>
+  <p>find命令允许您复制目录中的全部内容，同时保持每个文件和子目录的权限、时间和所有权。要完成该操作，需要组合使用find和cpio命令，如下所示：</p>
+  <p><br />
+    <br />
+    <a rel="nofollow"><strong>清单 2. 组合使用 find 和 cpio 命令</strong></a><br />
+  </p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="572" border="0">
+      <tbody>
+        <tr>
+          <td><pre>$ cd /path/to/source/dir<br /><br />$ find . | cpio -pdumv /path/to/destination/dir<br />
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p>cpio命令是一个复制命令，它设计用来将文件复制到或复制出一个 cpio 或 tar 存档文件，并自动地保持文件和子目录的权限、时间和所有权。</p>
+  <p><a rel="nofollow"><strong>列出文本文件的第一行内容</strong></a></p>
+  <p>有些人使用每个文本文件的第一行作为标题或者文件内容的描述。可以使用列出文件名和所有文本文件第一行内容的报表更方便地对大量的文本文件进行筛选。下面的命令在报表中列出了您的 home 目录中所有文本文件的第一行内容，便于进一步地根据需要使用less命令进行检查：</p>
+  <p><br />
+    <br />
+    <a rel="nofollow"><strong>清单 3. less 命令</strong></a><br />
+  </p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="572" border="0">
+      <tbody>
+        <tr>
+          <td><pre>$ find $HOME/. -name &quot;*.txt&quot; -exec head -n 1 {} \; &gt; report.txt<br /><br />$ less &lt; report.txt<br />
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p><a rel="nofollow"><strong>维护 LOG 和 TMP 文件的存储空间</strong></a></p>
+  <p>要为生成大量文件的应用程序维护 LOG 和 TMP 文件存储空间，可以将下列命令放入到每天运行的cron任务中：</p>
+  <p><br />
+    <br />
+    <a rel="nofollow"><strong>清单 4. 维护 LOG 和 TMP 文件存储空间</strong></a><br />
+  </p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="572" border="0">
+      <tbody>
+        <tr>
+          <td><pre>$ find $LOGDIR -type d -mtime +0 -exec compress -r {} \;<br /><br />$ find $LOGDIR -type d -mtime +5 -exec rm -f {} \;<br />
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p>第一个命令找到 $LOGDIR 目录中所有包含在 24 小时内(-mtime +0) 进行了修改的数据的目录(-type d), 对它们进行压缩(compress -r {}) 以节省磁盘空间。如果这些目录超过了一个工作周(-mtime +5)，第二个命令则将其删除(rm -f {})，以便增加磁盘上的可用空间。通过这种方式，cron 任务自动地根据您所指定的时间窗口对目录进行维护。</p>
+  <p>&nbsp;</p>
+  <p><a rel="nofollow"><strong>复制复杂的目录树</strong></a></p>
+  <p>如果您想要将复杂的目录树从一台计算机复制到另一台计算机，同时保持副本权限以及 User ID 和 Group ID（UID 和 GID——操作系统所使用的标记文件的所有权的数值），并且不复制用户文件，那么就需要再次使用find和cpio;</p>
+  <p><br />
+    <br />
+    <a rel="nofollow"><strong>清单 5. 复制复杂的目录树</strong></a><br />
+  </p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="572" border="0">
+      <tbody>
+        <tr>
+          <td><pre>$ cd /source/directory<br /><br />$ find . -depth -print | cpio -o -O /target/directory<br />(-小写o  -大写O)
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p><a rel="nofollow"><strong>查找不指向任何地方的链接</strong></a></p>
+  <p>要查找不指向任何地方的链接，可以使用带find的perl解释器，如下所示：</p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="400" border="0">
+      <tbody>
+        <tr>
+          <td><pre>$ find / -type l -print | perl -nle '-e || print';<br />
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p>该命令从最顶层目录 (/) 开始，列出由perl解释器确定不指向任何地方(-nle '-e || print')的所有链接(-type l -print)，关于 Unix Guru Universe 站点中这个技巧的更详细的信息。如果您想要删除这些文件，可以进一步使用管道将输出传递到rm -f {}命令。当然，Perl 可以在大多数的 UNIX 工具包中找到，它是许多功能强大的解释性语言工具中的一种。</p>
+  <p><a rel="nofollow"><strong>定位和重命名无法打印的目录</strong></a></p>
+  <p>在 UNIX 中，可能会有错误的或恶意的程序创建包含无法打印的字符的目录。定位和重命名这些目录，这样就可以更容易地检查并删除它们。要完成该操作，您首先需要在ls中包含-i开关，以获取该目录的索引节点的数值。然后，使用 find将索引节点的数值转换为一个可以使用mv命令进行重命名的文件名：</p>
+  <p><br />
+    <br />
+    <a rel="nofollow"><strong>清单 6. 定位和重命名无法打印的目录</strong></a><br />
+  </p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="572" border="0">
+      <tbody>
+        <tr>
+          <td><pre>$ ls -ail<br /><br />$ find . -inum 211028 -exec mv {} newname.dir \;<br />
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p><a rel="nofollow"><strong>列出长度为零的文件</strong></a></p>
+  <p>要列出所有长度为零的文件，请使用下面的命令：</p>
+  <div align="center">
+    <table cellspacing="0" cellpadding="0" width="400" border="0">
+      <tbody>
+        <tr>
+          <td><pre>$ find . -empty -exec ls {} \;<br />
+        </pre></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+  </div>
+  <p>在查找到空文件之后，您可以选择用rm命令来代替ls命令，以删除这些文件。</p>
+  <p><strong>很明显，您对 UNIXfind命令的使用受到知识和创造性的限制</strong>。</p>
+  <p><a rel="nofollow">结束语</a></p>
+  <p>使用find命令，可以轻松地浏览 UNIX 文件系统中丰富的内容。很值得花时间来试验该命令，并了解它能为您做些什么。正如本文中所列出的示例，您可以通过许多创造性的方式来使用find, 这样可以轻松地浏览和管理文件系统，并且充满乐趣。</p>
+</div>
 <p align="center">&nbsp;</p>
 <p align="center"><a href="../index.html">返回首页
 </a></p>

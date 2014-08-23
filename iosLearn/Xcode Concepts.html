@@ -7,12 +7,10 @@
 
 <body style="width:1000px">
 <div style="padding-left:50px; height:auto; width:1000px;">
-<h1 align="center">Xcode概念 </h1>
-<h2>Xcode Project</h2>
+<h1 align="center">Xcode概念</h1>
 <div style="padding-left:50px; height:auto; width:900px;">
-  <p>Xcode Project是一个包含构建一个或多个软件产品所需要的一切文件、资源及信息的仓库。 Project包含构建产品的所有元素，并负责维护各个元素之间的关系。它包含一个或多个target，这些target指定如何构建产品。Project 为其中的target定义了默认的编译设置（每个target也可以覆盖默认的设置，指定自己的构建设置）。</p>
-</div>
-<div style="padding-left:50px; height:auto; width:900px;">
+  <h2 align="center">Xcode Project</h2>
+  <p>          Xcode Project是一个包含构建一个或多个软件产品所需要的一切文件、资源及信息的仓库。 Project包含构建产品的所有元素,并负责维护各个元素之间的关系。它包含一个或多个target，这些target指定如何构建产品。Project 为其中的target定义了默认的编译设置（每个target也可以覆盖默认的设置，指定自己的构建设置）。</p>
 <p>Xcode Project 文件包含下面的一些信息：</p>
 <ul>
   <li>
@@ -70,7 +68,14 @@
 <p>You use Xcode schemes to specify which target, build configuration, and executable configuration is active at a given time.</p>
 <p align="left"> 使用Xcode  schemes来指定使用哪一个target、构建配置、可执行的配置</p>
 </div>
-<h2>Xcode Target</h2>
+<br><br><br>
+<div style="padding-left:50px; height:auto; width:900px;">
+<h2 align="center">Xcode Target</h2>
+<p>        一个Target指定一个产品来构建并且包含了从项目或workspace的全部（或部分）文件中构建产品的指令。一个target定义了一个单一的产品。它来组织构建产品的输入文件（包含构建产品必需的所有文件：源文件，预编译这些源文件的指令）。Project 可以包含一个或多个target，每个target产生一个产品。</p>
+<p>        构建产品的指令有两种形式：构建设置和构建阶段（Build settings 和 Build phases）, 你可以在Xcode的项目editor中检查并编辑它们。target继承了project的构建设置。但是你可以在target层次覆盖任何project的设置。在同一时刻，只有一个target是活跃的。Xcode scheme指定了那个target是活跃的。</p>
+<p>         一个target以及由它生成的产品可以与其他的target建立关系。如果构建一个target需要另一个target的输出，我们就说第一个target依赖于第二个target。如果它们两个都在同一个workspace中，xcode可以发现这种依赖关系，那么它就会按照需要的顺序来构建产品。这种关系叫做隐式依赖。你也可以在你的构建设置中设置显式依赖，并且你可以指定某两个xcode可能判定为有隐式依赖的target之间没有依赖关系。例如：你可以构建一个库以及一个链接这个库的在同一个workspace下的应用程序。xcode可以发现这种关系并且自动先构建这个库。当然，如果你确实需要链接到一个与当前workspace下不同版本的库中，你可以在你的构建设置中创建一个显示依赖，这将覆盖原来的隐式依赖。</p>
+<p>&nbsp;</p>
+</div>
 <div style="padding-left:50px; height:auto; width:900px;">
   
 </div>

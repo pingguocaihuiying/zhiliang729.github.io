@@ -30,10 +30,16 @@ function MM_swapImage() { //v3.0
 body,td,th {
 	font-size: 36px;
 }
+#main {
+	width: 1000px;
+	align: center;
+	margin: 0px auto;
+}
 </style>
 </head>
 
 <body >
+<div id="main">
 <p align="center">find命令</p>
 <div>
   <p>find命令可以删除、复制、移动和执行其查找到的文件。另外，使用-exec参数可以根据您需要的命令序列来自动运行这些文件。它甚至可以在对任何文件执行这些操作前，进一步让您进行确认。</p>
@@ -110,10 +116,10 @@ body,td,th {
   <p><a rel="nofollow"><strong>清除临时文件</strong></a></p>
   <p>您可以使用find 命令来清除目录或子目录中在正常使用过程中生成的临时文件，这样可以节省磁盘空间。要实现该操作，请使用下面的命令：</p>
   <div align="center">
-    <table cellspacing="0" cellpadding="0" width="400" border="0">
+    <table cellspacing="0" cellpadding="0" width="1000" border="0">
       <tbody>
         <tr>
-          <td><pre>$ find . \( -name a.out -o -name '*.o' -o -name 'core' \) -exec rm {} \;<br />
+          <td width="1295"><pre>$ find . \( -name a.out -o -name '*.o' -o -name 'core' \) -exec rm {} \;<br />
         </pre></td>
         </tr>
       </tbody>
@@ -163,10 +169,10 @@ body,td,th {
     <a rel="nofollow"><strong>清单 4. 维护 LOG 和 TMP 文件存储空间</strong></a><br />
   </p>
   <div align="center">
-    <table cellspacing="0" cellpadding="0" width="572" border="0">
+    <table width="1000" border="0" cellpadding="0" cellspacing="0">
       <tbody>
         <tr>
-          <td><pre>$ find $LOGDIR -type d -mtime +0 -exec compress -r {} \;<br /><br />$ find $LOGDIR -type d -mtime +5 -exec rm -f {} \;<br />
+          <td width="1008"><pre>$ find $LOGDIR -type d -mtime +0 -exec compress -r {} \;<br /><br />$ find $LOGDIR -type d -mtime +5 -exec rm -f {} \;<br />
         </pre></td>
         </tr>
       </tbody>
@@ -244,5 +250,6 @@ body,td,th {
 <p align="center">&nbsp;</p>
 <p align="center"><a href="../index.html">返回首页
 </a></p>
+</div>
 </body>
 </html>

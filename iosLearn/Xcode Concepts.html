@@ -84,14 +84,27 @@
 
 <div style="padding-left:50px; height:auto; width:900px;">
 <h2  align="center">Xcode Workspace</h2>
-<p>敬请期待…</p>
+<p>        Workspace是一个xcode文档，它将一些项目以及其他的文档组织在一起，以便于你基于它们进行工作。一个Workspace可以包含任意个xcode项目，你也可以往里面加一些你想要的文件。 另外，为了阻止每个项目中的文件，workspace 为包含的项目以及它们的target提供了显式或隐式的关系。</p>
+<h2>Workspace扩展了你的工作流程的范围</h2>
+<p>         一个项目文件包含了指向项目中所有文件的指针，也包含了便已设置以及其他的一些项目信息。在Xcode3及其以前的版本中，项目文件也就是组和文件结构层次的根节点。尽管一个项目可以包含另一个项目的引用，在xcode3 中基于有关联的不同项目工作还是很麻烦的。大部分工作流程局限于一个单一的项目。Xcode4以后的各个版本中，你可以选择创建一个workspace来掌握一个或多个项目，添加你想包含的文件。</p>
+<p>          除了提供对于每个xcode项目中文件的访问权以外，workspace扩展了许多重要的xcode工作流程的范围。例如，因为索引是通过整个workspace来进行的，所以代码自动填充，跳转到定义，以及其它所有的内容感知的特性才能在workspace中的所有项目中无缝地工作。因为重构操作对于workspace中的所有内容都是起作用的，你可以只用一次操作就重构一个框架项目中的API以及若干个使用这个框架的应用程序项目。当构建的时候，workspace中的一个项目可以使用同一个workspace中其它项目的产品。 </p>
+<p>一个Workspace文档包含了只想项目及其它文件的指针，但没有其它数据。一个项目可以属于不止一个workspace。下图展示了一个包含了两个xcode项目(Sketch 和 TextEdit)的workspace，以及一些文档项目（Xcode4TransGuideDocPlan）.</p>
+<img src="https://developer.apple.com/library/ios/featuredarticles/XcodeConcepts/art/workspace_hierarchy.jpg" alt="art/workspace_hierarchy.jpg" width="263" height="427" />
+<h2>Workspace中的项目共享同一个构建目录</h2>
+<p>          默认情况下，一个workspace中的所有xcode项目都是在同一个目中编译的，此目录也称为workspace的构建目录。每个workspace有他们自己的构建目录。因为一个workspace的所有项目中的所有文件都在同一个构建目录中。所有的这些文件对于其它的项目而言是可见的。因此，如果两个或更多项目使用同一个库，你不用将它分别拷贝到各自项目的独立的文件夹中去。 </p>
+<p>          Xcode检查构建目录中的文件来建立隐式的依赖。例如，如果workspace中的一个项目构建了一个库，而同一个workspace中的 另一个项目也链接到这个库上，Xcode会在构建另一个项目之前自动构建这个库。尽管编译设置没有显式地设置。如果有必要的话，你可以用明确地用一个编译设置来覆盖这个隐式依赖。对于显式的依赖你必须创建项目引用。</p>
+<p>          Workspace中的每个项目仍然拥有它们的独立身份。要打开workspace中一个不受影响，或者被影响的项目，你可以直接打开这个项目，而不在workspace中打开。或者你可以添加此项目到另一个workspace中。因为一个项目可以属于不同的workspace，你可以建立任意数目的组合来工作，而不用修改任何项目或workspace。</p>
+<p>           你可以使用workspace 的默认构建目录，你也可以指定一个。注意，如果一个项目指定了构建目录，当你构建这个项目时，这个目录会被包含它的workspace的构建目录覆盖掉。</p>
 </div>
 
 <div style="padding-left:50px; height:auto; width:900px;">
 <h2  align="center">Build Settings</h2>
 <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 一个构建设置是一个变量，这个变量包含了产品构建过程中某一方面应该如何展现的信息。例如：构建设置中的信息可以指定xcode传给编译器的选项。</p>
 <p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;你可以在project或target上设定构建设置。每个project的构建设置会应用到当前project上所有的target上，除非某一个target的构建设置中显式覆盖了原来的设置。</p>
-<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; 每个target管理需要构建一个project的资源文件。一个构建设置指定了</p>
+<p>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; 每个target管理需要构建一个product的资源文件。一个构建设置指定了一个特定的方式来用来构建一个target所对应产品构建环境。例如，对于一个产品，其debug和release的设置可以分开。</p>
+<p>        xcode的构建环境分为两个部分：设定名称及其定义。构建环境title指明了构建设置，而且可以在其他设置中使用。构建设置是xcode在构建阶段用来决定构建环境值的一个常量或公式。构建设置可能有一个展示的名称，用来在xcode用户界面中展示。</p>
+<p>        当你从项目模板中创建一个新的项目时，除了有xcode默认的构建设置，你还可以为你的项目或某个特定的target创建用户自定义的构建设置。你还可以指定条件编译设置。一个条件编译设置的值取决于是否有一个或多个前提条件。例如，这种机制允许你指定用来构建一个依赖于 特定架构的产品的sdk。</p>
+<p>        </p>
 </div>
 
 <div>
